@@ -1,0 +1,174 @@
+{{define "UserApiEndpoint"}}
+
+{{$host := .}}
+
+{
+  "endpoint": "/v1/auth/sign-in",
+  "input_headers": ["*"],
+  "method": "POST",
+  "backend": [
+    {
+      "host": ["{{ $host }}"],
+      "url_pattern": "/api/v1/auth/sign-in"
+    }
+  ]
+},
+{
+  "endpoint": "/v1/auth/sign-up",
+  "input_headers": ["*"],
+  "method": "POST",
+  "backend": [
+    {
+      "host": ["{{ $host }}"],
+      "url_pattern": "/api/v1/auth/sign-up"
+    }
+  ]
+},
+{
+  "endpoint": "/v1/auth/verify-email",
+  "method": "PATCH",
+  "backend": [
+    {
+      "host": ["{{ $host }}"],
+      "url_pattern": "/api/v1/auth/verify-email"
+    }
+  ]
+},
+{
+  "endpoint": "/v1/auth/forgot-password",
+  "method": "POST",
+  "backend": [
+    {
+      "host": ["{{ $host }}"],
+      "url_pattern": "/api/v1/auth/forgot-password"
+    }
+  ]
+},
+{
+  "endpoint": "/v1/auth/reset-password",
+  "method": "PATCH",
+  "backend": [
+    {
+      "host": ["{{ $host }}"],
+      "url_pattern": "/api/v1/auth/reset-password"
+    }
+  ]
+},
+{
+  "endpoint": "/v1/auth/logout",
+  "method": "POST",
+  "backend": [
+    {
+      "host": ["{{ $host }}"],
+      "url_pattern": "/api/v1/auth/logout"
+    }
+  ],
+  "extra_config": {
+    "auth/validator": {
+      "alg": "HS256",
+      "jwk_url": "https://res.cloudinary.com/drwm3i3g4/raw/upload/v1701403054/symmetric_nxvpme.json",
+      "disable_jwk_security": true,
+      "cache": true,
+      "operation_debug": true,
+      "propagate_claims": [
+        ["email", "x-user-email"],
+        ["id", "x-user-id"]
+      ]
+    }
+  },
+  "input_headers": ["x-user-email", "x-user-id", "User-Agent"]
+},
+{
+  "endpoint": "/v1/users/me",
+  "method": "GET",
+  "backend": [
+    {
+      "host": ["{{ $host }}"],
+      "url_pattern": "/api/v1/users/me"
+    }
+  ],
+  "extra_config": {
+    "auth/validator": {
+      "alg": "HS256",
+      "jwk_url": "https://res.cloudinary.com/drwm3i3g4/raw/upload/v1701403054/symmetric_nxvpme.json",
+      "disable_jwk_security": true,
+      "cache": true,
+      "operation_debug": true,
+      "propagate_claims": [
+        ["email", "x-user-email"],
+        ["id", "x-user-id"]
+      ]
+    }
+  },
+  "input_headers": ["x-user-email", "x-user-id", "User-Agent"]
+},
+{
+  "endpoint": "/v1/users/me",
+  "method": "PUT",
+  "backend": [
+    {
+      "host": ["{{ $host }}"],
+      "url_pattern": "/api/v1/users/me"
+    }
+  ],
+  "extra_config": {
+    "auth/validator": {
+      "alg": "HS256",
+      "jwk_url": "https://res.cloudinary.com/drwm3i3g4/raw/upload/v1701403054/symmetric_nxvpme.json",
+      "disable_jwk_security": true,
+      "cache": true,
+      "operation_debug": true,
+      "propagate_claims": [
+        ["email", "x-user-email"],
+        ["id", "x-user-id"]
+      ]
+    }
+  },
+  "input_headers": ["x-user-email", "x-user-id", "User-Agent"]
+},
+{
+  "endpoint": "/v1/roles",
+  "method": "POST",
+  "backend": [
+    {
+      "host": ["{{ $host }}"],
+      "url_pattern": "/api/v1/roles"
+    }
+  ],
+  "input_headers": ["x-user-email", "x-user-id", "User-Agent"]
+},
+{
+  "endpoint": "/v1/roles/{role_id}",
+  "method": "PUT",
+  "backend": [
+    {
+      "host": ["{{ $host }}"],
+      "url_pattern": "/api/v1/roles/{role_id}"
+    }
+  ],
+  "input_headers": ["x-user-email", "x-user-id", "User-Agent"]
+},
+{
+  "endpoint": "/v1/permissions",
+  "method": "POST",
+  "backend": [
+    {
+      "host": ["{{ $host }}"],
+      "url_pattern": "/api/v1/permissions"
+    }
+  ],
+  "input_headers": ["x-user-email", "x-user-id", "User-Agent"]
+},
+{
+  "endpoint": "/v1/permissions/{permission_id}",
+  "method": "PUT",
+  "backend": [
+    {
+      "host": ["{{ $host }}"],
+      "url_pattern": "/api/v1/permissions/{permission_id}"
+    }
+  ],
+  "input_headers": ["x-user-email", "x-user-id", "User-Agent"]
+}
+
+{{end}}

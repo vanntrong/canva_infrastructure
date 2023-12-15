@@ -1,0 +1,8 @@
+{
+  "host": ["http://localhost:8080"],
+  "users_api": ["http://host.docker.internal:8081"],
+  "inventory_api": "https://inventory-api.mycompany.com",
+  "3rdparty": {
+    "github": "https://api.github.com"
+  }
+}

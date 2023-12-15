@@ -1,0 +1,159 @@
+{{define "CategoryApiEndpoint"}}
+
+{{$host := .}}
+
+{
+      "endpoint": "/v1/upload",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "HS256",
+          "jwk_url": "http://localhost:8081/symmetric.json",
+          "disable_jwk_security": true,
+          "cache": true,
+          "operation_debug": true,
+          "roles_key": "roles",
+          "roles": ["admin", "user"],
+          "propagate_claims": [["roles", "x-user-roles"]]
+        }
+      },
+      "input_headers": ["Authorization", "x-user-roles", "Content-Type"],
+
+      "backend": [
+        {
+          "host": ["localhost:8081"],
+          "url_pattern": "/api/v1/upload"
+        }
+      ]
+    },
+
+    {
+      "endpoint": "/v1/categories",
+      "method": "GET",
+      "input_query_strings": [
+        "offset",
+        "limit",
+        "sortBy",
+        "sortOrder",
+        "keyword"
+      ],
+      "backend": [
+        {
+          "host": ["localhost:8082"],
+          "url_pattern": "/api/v1/categories"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/categories",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "HS256",
+          "jwk_url": "http://localhost:8081/symmetric.json",
+          "disable_jwk_security": true,
+          "cache": true,
+          "operation_debug": true,
+          "roles_key": "roles",
+          "roles": ["admin"]
+        }
+      },
+      "input_headers": ["Authorization", "Content-Type"],
+      "backend": [
+        {
+          "host": ["localhost:8082"],
+          "url_pattern": "/api/v1/categories"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/products",
+      "method": "GET",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "HS256",
+          "jwk_url": "http://localhost:8081/symmetric.json",
+          "disable_jwk_security": true,
+          "cache": true,
+          "operation_debug": true,
+          "roles_key": "roles",
+          "roles": ["admin"]
+        }
+      },
+      "input_headers": ["Authorization", "Content-Type"],
+      "input_query_strings": [
+        "offset",
+        "limit",
+        "keyword",
+        "sortBy",
+        "sortOrder",
+        "min_price",
+        "max_price"
+      ],
+      "backend": [
+        {
+          "host": ["localhost:8082"],
+          "url_pattern": "/api/v1/products"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/promotions",
+      "method": "GET",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "HS256",
+          "jwk_url": "http://localhost:8081/symmetric.json",
+          "disable_jwk_security": true,
+          "cache": true,
+          "operation_debug": true,
+          "roles_key": "roles",
+          "roles": ["admin", "user"]
+        }
+      },
+      "input_headers": ["Authorization", "Content-Type"],
+      "input_query_strings": [
+        "offset",
+        "limit",
+        "keyword",
+        "sortBy",
+        "sortOrder"
+      ],
+      "backend": [
+        {
+          "host": ["localhost:8082"],
+          "url_pattern": "/api/v1/promotions"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/promotions",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "HS256",
+          "jwk_url": "http://localhost:8081/symmetric.json",
+          "disable_jwk_security": true,
+          "cache": true,
+          "operation_debug": true,
+          "roles_key": "roles",
+          "roles": ["admin"]
+        }
+      },
+      "input_headers": ["Authorization", "Content-Type"],
+      "input_query_strings": [
+        "offset",
+        "limit",
+        "keyword",
+        "sortBy",
+        "sortOrder"
+      ],
+      "backend": [
+        {
+          "host": ["localhost:8082"],
+          "url_pattern": "/api/v1/promotions"
+        }
+      ]
+    }
+    
+{{end}}

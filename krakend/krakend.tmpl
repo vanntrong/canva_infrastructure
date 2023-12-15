@@ -1,0 +1,25 @@
+{
+  "$schema": "https://www.krakend.io/schema/v3.json",
+  "version": 3,
+  "name": "Canva Clone Gateway",
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "host": {{ marshal  .urls.host }},
+  "output_encoding": "no-op",
+  "extra_config": {
+    "router": {
+      "return_error_msg": true
+    },
+    "security/cors": {
+      "allow_origins": ["*"],
+      "allow_methods": ["POST", "GET", "PUT", "DELETE", "PATCH"],
+      "max_age": "12h",
+      "expose_headers": ["*"],
+      "allow_headers": ["*"]
+    }
+  },
+  "debug_endpoint": true,
+  "endpoints": [
+    {{ template "Endpoint" .urls }}
+  ]
+}
