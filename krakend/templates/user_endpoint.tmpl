@@ -97,7 +97,9 @@
       "propagate_claims": [
         ["email", "x-user-email"],
         ["id", "x-user-id"]
-      ]
+      ],
+      "roles_key": "permissions",
+      "roles": ["user:readMe"]
     }
   },
   "input_headers": ["x-user-email", "x-user-id", "User-Agent"]
@@ -121,7 +123,9 @@
       "propagate_claims": [
         ["email", "x-user-email"],
         ["id", "x-user-id"]
-      ]
+      ],
+      "roles_key": "permissions",
+      "roles": ["user:updateMe"]
     }
   },
   "input_headers": ["x-user-email", "x-user-id", "User-Agent"]
@@ -135,6 +139,21 @@
       "url_pattern": "/api/v1/roles"
     }
   ],
+  "extra_config": {
+    "auth/validator": {
+      "alg": "HS256",
+      "jwk_url": "https://res.cloudinary.com/drwm3i3g4/raw/upload/v1701403054/symmetric_nxvpme.json",
+      "disable_jwk_security": true,
+      "cache": true,
+      "operation_debug": true,
+      "propagate_claims": [
+        ["email", "x-user-email"],
+        ["id", "x-user-id"]
+      ],
+      "roles_key": "permissions",
+      "roles": ["role:create", "role:read"]
+    }
+  },
   "input_headers": ["x-user-email", "x-user-id", "User-Agent"]
 },
 {
@@ -146,6 +165,21 @@
       "url_pattern": "/api/v1/roles/{role_id}"
     }
   ],
+  "extra_config": {
+    "auth/validator": {
+      "alg": "HS256",
+      "jwk_url": "https://res.cloudinary.com/drwm3i3g4/raw/upload/v1701403054/symmetric_nxvpme.json",
+      "disable_jwk_security": true,
+      "cache": true,
+      "operation_debug": true,
+      "propagate_claims": [
+        ["email", "x-user-email"],
+        ["id", "x-user-id"]
+      ],
+      "roles_key": "permissions",
+      "roles": ["role:update", "role:read"]
+    }
+  },
   "input_headers": ["x-user-email", "x-user-id", "User-Agent"]
 },
 {
@@ -157,6 +191,21 @@
       "url_pattern": "/api/v1/permissions"
     }
   ],
+  "extra_config": {
+    "auth/validator": {
+      "alg": "HS256",
+      "jwk_url": "https://res.cloudinary.com/drwm3i3g4/raw/upload/v1701403054/symmetric_nxvpme.json",
+      "disable_jwk_security": true,
+      "cache": true,
+      "operation_debug": true,
+      "propagate_claims": [
+        ["email", "x-user-email"],
+        ["id", "x-user-id"]
+      ],
+      "roles_key": "permissions",
+      "roles": ["permission:create", "permission:read"]
+    }
+  },
   "input_headers": ["x-user-email", "x-user-id", "User-Agent"]
 },
 {
@@ -168,6 +217,21 @@
       "url_pattern": "/api/v1/permissions/{permission_id}"
     }
   ],
+  "extra_config": {
+    "auth/validator": {
+      "alg": "HS256",
+      "jwk_url": "https://res.cloudinary.com/drwm3i3g4/raw/upload/v1701403054/symmetric_nxvpme.json",
+      "disable_jwk_security": true,
+      "cache": true,
+      "operation_debug": true,
+      "propagate_claims": [
+        ["email", "x-user-email"],
+        ["id", "x-user-id"]
+      ],
+      "roles_key": "permissions",
+      "roles": ["permission:update", "permission:read"]
+    }
+  },
   "input_headers": ["x-user-email", "x-user-id", "User-Agent"]
 }
 
